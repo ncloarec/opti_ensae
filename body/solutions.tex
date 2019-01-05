@@ -10,17 +10,38 @@ Montrer que $\A$ doit faire appel à l’oracle d’ordre zéro au moins $\Omega
 
 \begin{rep}
 
-Tout d'abord, notons que pour $ f \in \fl$ le problème d'optimisation $ \displaystyle \min _ { [ 0,1 ] } f$ est bien définie car on optimise une fonction continue\footnote{rappelons que lipschitzienne entraîne, uniformément continue qui entraîne continue.} sur un compat.
+Tout d'abord, notons que pour $ f \in \fl$ le problème d'optimisation $ \displaystyle \min _ { [ 0,1 ] } f$ est bien définie car on optimise une fonction continue\footnote{rappelons que lipschitzienne entraîne uniformément continue qui entraîne continue.} sur un compat.
 
 Appliquons comme indiqué l'algorithme $\A$ à la fonction nulle sur $\intff{0}{1}$ notée $f$. Soient $x_1 \leq x_2 \ldots \leq x_n$ la suite de points de $\intff{0}{1}$ utilisés lors des appels à l'oracle d'ordre zéro. Posons $x_0 = 0$ et $x_{n+1}=1$ et introduisons:
   $$\alpha := \max_{0\leq i \leq n} \abs{x_{i+1}-x_{i}}
   , \quad  k := \argmax_{0\leq i \leq n} \abs{x_{i+1}-x_{i}}
-  \quad \text{ et } \quad \xtilde := \frac{x_{i+1}+x_{i}}{2}
+  \quad \text{ et } \quad \xtilde := \frac{x_{k+1}+x_{k}}{2}
   $$
 
   Soit $g:\intff{0}{1} \mapsto \R$, la fonction continue et affine par morceaux de pente
-  $-L$ et $L$ sur $\intff{x_k}{\xtilde}$ et $\intff{\xtilde}{x_{k+1}}$ respectivement.
-  $$g(x)= \longrightarrow \min \acc{ 0,L\prt{\abs{x-\xtilde} - \abs{x_k-\xtilde}} }$$
+  $-L$ et $L$ sur $\intff{x_k}{\xtilde}$ et $\intff{\xtilde}{x_{k+1}}$ respectivement. $g$
+  s'écrit simplement:
+  $$g(x)= \min \acc{ 0,L\prt{\abs{x-\xtilde} - \abs{x_k-\xtilde}} }$$
+
+Notons que l'on a bien $g\in \fl$.
+
+  Comme l'algorithme $\A$ dépend uniquement des valeurs $f(x_i)=g(x_i)$ pour $i=1$ à $n$,
+  la sortie de $\A$ noté $\xopt$\footnote{$\xopt=x_{j}$ pour un certain $j\in \acc{1,\ldots,n}$.}  sera la même pour $f$ ou $g$. Par définition de $\A$, on a que :
+   $ \displaystyle g \left( \xopt \right) \leq \min _ { [ 0,1 ] } g + \varepsilon$,
+ ce qui s'écrit ici
+ \begin{equation}\label{eq:g}
+   0 \leq -L \frac{\alpha}{2} + \varepsilon.
+ \end{equation}
+   De plus on a: $ 1= \sum_{i=0}^n x_{i+1}-x_i \leq (n+1) \cdot \alpha$,
+   d'où
+\begin{equation}\label{eq:alpha}
+\alpha \geq \frac{1}{n+1}.
+\end{equation}
+   En combinant\eqref{eq:g} et \eqref{eq:alpha}, on en déduit
+   \begin{equation}
+     n \geq \frac{L}{2 \varepsilon}-1,
+   \end{equation}
+   d'où le résultat.
 \end{rep}
 
 
@@ -30,4 +51,17 @@ En déduire la complexité optimale sur $\fl$, en fonction de $L$ et $\varepsilo
 
 \begin{rep}
 
+Notons $x_k := \frac{k}{n}$ pour $k=0$ à $n$ et introduisons l'algorithme $\A$
+ renvoyant $\displaystyle \xopt = \argmin_{x \in \acc{x_i}_{i=0}^n} f(x)$.
+ Soit $\xtilde$ un minimum de $f$ sur $\intff{0}{1}$. Notons qu'il existe $i$ tel
+  que $ x_i \leq \xtilde \leq x_{i+1}$.
+
+  En utilisant le fait que f est $L$-lipschitzienne, on a :
+  \begin{align*}
+    \abs{f(\xtilde)-f(x_i)} &\leq \abs{f(x_{i+1})-f(x_i)}\\
+    &\leq L \abs{x_{i+1}-x_i}\\
+    &= \frac{1}{n} \cdot L
+  \end{align*}
+  En prenant $n\geq \frac{1}{\varepsilon}\cdot L$ suffisamment grand, on a bien
+la précision attendue pour $\A$, ce qui permet de conclure à l'optimalité de $\bigo{L/\varepsilon}$. 
 \end{rep}
