@@ -1,0 +1,33 @@
+\begin{exo}
+Soient $\varepsilon, L>0$ et $\fl$ l'ensemble des applications $L$-Lipschitziennes de $\intff{0}{1}$
+ dans $\R$. Soit $\A$ un algorithme renvoyant, pour toute fonction $ f \in \fl$,
+  un nombre $\xopt \in \intff{0}{1}$ tel que $\displaystyle f \left( \xopt \right) \leq \min _ { [ 0,1 ] } f + \varepsilon$. On suppose que $\A$ fait uniquement appel à l’oracle d’ordre zéro.
+\end{exo}
+
+\begin{qst}
+Montrer que $\A$ doit faire appel à l’oracle d’ordre zéro au moins $\Omega ( L / \varepsilon )$ fois. \textit{Indice: Considérer la fonction nulle, et construire une fonction $g \in \fl$ valant zéro en tous les points en lesquels l’oracle d’ordre zéro est appelé pour la fonction nulle, dont le minimum est le plus petit possible.}
+\end{qst}
+
+\begin{rep}
+
+Tout d'abord, notons que pour $ f \in \fl$ le problème d'optimisation $ \displaystyle \min _ { [ 0,1 ] } f$ est bien définie car on optimise une fonction continue\footnote{rappelons que lipschitzienne entraîne, uniformément continue qui entraîne continue.} sur un compat.
+
+Appliquons comme indiqué l'algorithme $\A$ à la fonction nulle sur $\intff{0}{1}$ notée $f$. Soient $x_1 \leq x_2 \ldots \leq x_n$ la suite de points de $\intff{0}{1}$ utilisés lors des appels à l'oracle d'ordre zéro. Posons $x_0 = 0$ et $x_{n+1}=1$ et introduisons:
+  $$\alpha := \max_{0\leq i \leq n} \abs{x_{i+1}-x_{i}}
+  , \quad  k := \argmax_{0\leq i \leq n} \abs{x_{i+1}-x_{i}}
+  \quad \text{ et } \quad \xtilde := \frac{x_{i+1}+x_{i}}{2}
+  $$
+
+  Soit $g:\intff{0}{1} \mapsto \R$, la fonction continue et affine par morceaux de pente
+  $-L$ et $L$ sur $\intff{x_k}{\xtilde}$ et $\intff{\xtilde}{x_{k+1}}$ respectivement.
+  $$g(x)= \longrightarrow \min \acc{ 0,L\prt{\abs{x-\xtilde} - \abs{x_k-\xtilde}} }$$
+\end{rep}
+
+
+\begin{qst}
+En déduire la complexité optimale sur $\fl$, en fonction de $L$ et $\varepsilon$, pour les algorithmes ne faisant appel qu’à l’oracle d’ordre zéro.
+\end{qst}
+
+\begin{rep}
+
+\end{rep}
