@@ -1,3 +1,7 @@
+\begin{chap}
+
+
+
 \begin{exo}
 Soient $\varepsilon, L>0$ et $\fl$ l'ensemble des applications $L$-Lipschitziennes de $\intff{0}{1}$
  dans $\R$. Soit $\A$ un algorithme renvoyant, pour toute fonction $ f \in \fl$,
@@ -63,5 +67,61 @@ Notons $x_k := \frac{k}{n}$ pour $k=0$ à $n$ et introduisons l'algorithme $\A$
     &= \frac{1}{n} \cdot L
   \end{align*}
   En prenant $n\geq \frac{1}{\varepsilon}\cdot L$ suffisamment grand, on a bien
-la précision attendue pour $\A$, ce qui permet de conclure à l'optimalité de $\bigo{L/\varepsilon}$. 
+la précision attendue pour $\A$, ce qui permet de conclure à l'optimalité de $\bigo{L/\varepsilon}$.
 \end{rep}
+
+\end{chap}
+
+\begin{chap}
+\begin{exo}
+Soit $A \in \R^{d\times d}$ et $E = \left\{ x \in \mathbb { R } ^ { d } : x ^ { \top } A x \leq 1 \right\}$.
+\end{exo}
+
+\begin{qst}
+  Montrer l'existence d'une matrice symétrique $\Atilde \in \R^{d\times d}$ telle que
+  $E = \left\{ x \in \mathbb { R } ^ { d } : x ^ { \top } \Atilde x \leq 1 \right\}$.
+  Dorénavant, on supposera que $A$ est symétrique, sans perte de généralité.
+\end{qst}
+
+\begin{rep}
+On a succesivement:
+\begin{align}
+  x \in E &\leftrightarrow \transpose{x}Ax \leq 1 \label{eq:1} \\
+&\leftrightarrow \transpose{\prt{\transpose{x}Ax}} \leq 1 \nonumber\\
+&\leftrightarrow \transpose{x}\transpose{A}x \leq 1 \label{eq:2}
+\end{align}
+En moyennant les équations \eqref{eq:1} et \eqref{eq:2}, on a donc
+\begin{equation}\label{eq:3}
+  x \in E \implies \transpose{x}\prt{\frac{A+\transpose{A}}{2}}x \leq 1
+\end{equation}
+Réciproquement, si l'inégalité \eqref{eq:3} est vérifiée, on a
+\begin{align*}
+  \transpose{x}\prt{\frac{A+\transpose{A}}{2}}x &= \frac{1}{2} \acc{
+  \transpose{x}Ax+\transpose{x}\transpose{A}x
+  } \\
+  &= \frac{1}{2} 2 \transpose{x}Ax = \transpose{x}Ax \leq 1.
+\end{align*}
+Il suffit alors de poser $\Atilde := \frac{A+\transpose{A}}{2}$ pour nous permettre
+ de conclure.
+\end{rep}
+
+
+\begin{qst}
+Montrer que $E$ est fermé.
+\end{qst}
+
+\begin{rep}
+Remarquons que la topologie de $E$ ne dépend pas de la norme choisie car $E \subset \R^d$
+ de dimension finie. Soit $\norme{\;\cdot \;}$ la nome euclidienne et $\acc{x_n}$
+ une suite de $E$ convergeant vers $x \in \R^d$.
+
+ En utilisant l'inégalité de Cauchy-Schwartz et la définition des $x_n$ appartenant
+  à $E$:
+ \begin{alignat*}{3}
+\bigps{x}{Ax} &= \bigps{x-x_n}{Ax} &&+ \bigps{x_n}{A\prt{x-x_n}} &&+\bigps{x_n}{Ax_n}\\
+&\leq \norme{x-x_n}\cdot \norme{Ax} &&+ \norme{x_n} \cdot \normetriple{A} \cdot \norme{x-x_n} &&+1\\
+\end{alignat*}
+En utilisant la convergence des $x_n$ et le fait que toute suite convergeante est bornée, on en déduit bien par passage à la limite que $x$ appartient à $E$. 
+\end{rep}
+
+\end{chap}

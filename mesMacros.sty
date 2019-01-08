@@ -61,6 +61,7 @@
 \newcommand{\xopt}{x^{\star}}
 \newcommand{\bigo}[1]{\mathcal{O}\prt{#1}}
 \newcommand{\xtilde}{\widetilde{x}}
+\newcommand{\Atilde}{\widetilde{A}}
 
 % ==================================================
 % Opérations
@@ -261,11 +262,11 @@
 % ==================================================
 % Produit scalaire
 % ==================================================
-\newcommand{\ps}[2]{\mathopen(\ifempty{#1}{\dotpourvariable}{#1}\!\mid\!\ifempty{#2}{\dotpourvariable}{#2}\mathclose)}
-\newcommand{\bigps}[2]{\bigl( #1 \!\mid\! #2 \bigr)}
-\newcommand{\Bigps}[2]{\Bigl( #1 \!\mid\! #2 \Bigr)}
-\newcommand{\biggps}[2]{\biggl( #1 \!\mid\! #2 \biggr)}
-\newcommand{\Biggps}[2]{\Bigl( #1 \!\mid\! #2 \Biggr)}
+\newcommand{\ps}[2]{\mathopen(\ifempty{#1}{\dotpourvariable}{#1}\!,\!\ifempty{#2}{\dotpourvariable}{#2}\mathclose)}
+\newcommand{\bigps}[2]{\bigl \langle #1 \;,\; #2 \bigr \rangle}
+\newcommand{\Bigps}[2]{\Bigl \langle #1 \;,\; #2 \Bigr \rangle}
+\newcommand{\biggps}[2]{\biggl \langle #1 \;,\; #2 \biggr \rangle}
+\newcommand{\Biggps}[2]{\Bigl \langle #1 \;,\; #2 \Biggr \rangle}
 % ==================================================
 % Produit scalaire crochet
 % ==================================================
@@ -429,6 +430,7 @@
 \definecolor{mybrown}{RGB}{128, 64, 0}
 \definecolor{mypurple}{RGB}{128, 0, 128}
 \definecolor{electriccrimson}{rgb}{1.0, 0.0, 0.25}
+\definecolor{darkgoldenrod}{rgb}{0.72, 0.53, 0.04}
 
 % ==================================================
 % Fioritures
@@ -576,4 +578,28 @@
  \refstepcounter{sol}%
  \noindent { \textcolor{Red}{\fontfamily{pzc}\selectfont \large {\LARGE\textsc{S}}olution \thesol.}}%
  \hspace{0.5em}}
+{\medskip}
+
+%%%%%%%% ENVIRONNEMENT CHAPTER %%%%%%%%%%
+
+\makeatletter
+\newcounter{chap}[section]
+\newenvironment{chap}[1][]
+{
+
+ \fancyline
+
+ \edef\@chap{#1}%
+ \ifx\@chap\empty{}\else{\setcounter{chap}{#1}\addtocounter{chap}{-1}}\fi%
+ \refstepcounter{chap}%
+  {
+\setcounter{exo}{0}
+\setcounter{sol}{0}
+\setcounter{qst}{0}
+\setcounter{rep}{0}
+
+  \begin{center}
+  \textcolor{darkgoldenrod}{\fontfamily{pzc}\selectfont \large {\Huge \textsc{C}}hapitre \thechap.}
+\end{center}}%
+}
 {\medskip}
